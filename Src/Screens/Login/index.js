@@ -13,7 +13,7 @@ import {
   RememberMe,
 } from '../../Components/Rest';
 
-export default Login = () => {
+export default Login = props => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [hidePassword, setHidePassword] = useState(true);
@@ -67,7 +67,9 @@ export default Login = () => {
           justifyContent: 'space-between',
         }}>
         <RememberMe email={email} />
-        <ForgotPassword />
+        <ForgotPassword
+          onPress={() => props.navigation.navigate('ForgotPassword')}
+        />
       </View>
       <PrimaryButton title={'Login'} />
       <Or />
@@ -112,7 +114,7 @@ export default Login = () => {
         />
       </View>
 
-      <DontHaveAccount />
+      <DontHaveAccount onPress={() => props.navigation.navigate('Signup')} />
     </SafeAreaView>
   );
 };

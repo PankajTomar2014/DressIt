@@ -15,7 +15,7 @@ import {
   TitleText,
 } from '../../Components/Rest';
 
-export default Signup = () => {
+export default Signup = props => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [hidePassword, setHidePassword] = useState(true);
@@ -30,13 +30,29 @@ export default Signup = () => {
         <Input
           style={{marginTop: verticalScale(40)}}
           placeholder={'Enter email'}
-          error="This is dummy error,error will look like this."
+          error=""
+        />
+        <Input
+          editable={!isLoading}
+          isNeedPassword
+          isHide={hidePassword}
+          secureTextEntry={hidePassword}
+          onPressEye={() => setHidePassword(!hidePassword)}
+          placeholder={'Password'}
         />
         <PrimaryButton
+          onPress={() =>
+            props.navigation.navigate('VerifyOtp', {
+              type: 'signup',
+            })
+          }
           style={{marginTop: verticalScale(50)}}
           title={'Submit & Verify'}
         />
-        <DontHaveAccount isUserExist={true} />
+        <DontHaveAccount
+          isUserExist={true}
+          onPress={() => props.navigation.goBack()}
+        />
       </ScrollView>
     </SafeAreaView>
   );

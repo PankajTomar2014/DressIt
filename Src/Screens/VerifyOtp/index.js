@@ -19,6 +19,8 @@ import {SubTitleText, TitleText} from '../../Components/Rest';
 import styles from './styles';
 
 export default OtpVerify = props => {
+  const {type} = props.route.params;
+
   let textInput1 = useRef(null);
   let textInput2 = useRef(null);
   let textInput3 = useRef(null);
@@ -92,13 +94,26 @@ export default OtpVerify = props => {
     }
   };
 
-  const onSubmitOTP = async () => {
-    Keyboard.dismiss();
-    if (otp.length < 4) {
-      showToast('e', 'Please enter OTP');
-    } else {
-      showToast('i', otp);
-    }
+  // const onSubmitOTP = async () => {
+  //   Keyboard.dismiss();
+  //   if (otp.length < 4) {
+  //     showToast('e', 'Please enter OTP');
+  //   } else {
+  //     showToast('i', otp);
+  //   }
+  // };
+
+  const verifyOTP = () => {
+    try {
+      if (type == 'signup') {
+        props.navigation.reset({
+          index: 0,
+          routes: [{name: 'Login'}],
+        });
+      } else if (type == 'ForgotPassword') {
+        props.navigation.navigate('ResetPassword');
+      }
+    } catch (error) {}
   };
 
   return (
@@ -233,35 +248,11 @@ export default OtpVerify = props => {
           )}
         </View>
 
-        {/* {countState && (
-          <View style={styles.bottomContainer}>
-            <CountdownCircleTimer
-              isPlaying
-              size={35}
-              duration={60}
-              strokeWidth={3}
-              colors={[Colors.skyBlue]}
-              trailColor={Colors.red}
-              onComplete={() => {
-                setCountState(false);
-              }}>
-              {({remainingTime}) => (
-                <View style={{alignItems: 'center'}}>
-                  <Animated.Text
-                    style={{...styles.remainingTime, color: Colors.skyBlue}}>
-                    {remainingTime}
-                  </Animated.Text>
-                </View>
-              )}
-            </CountdownCircleTimer>
-          </View>
-        )} */}
-
         <PrimaryButton
           style={{marginTop: verticalScale(30)}}
           onPress={() => {
             Keyboard.dismiss();
-            onSubmitOTP();
+            verifyOTP();
           }}
           isLoading={isLoading}
           title={'Verify'}

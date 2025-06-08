@@ -57,10 +57,10 @@ export const RememberMe = ({email}) => {
   );
 };
 
-export const ForgotPassword = () => {
+export const ForgotPassword = ({onPress}) => {
   return (
     <CustomText
-      onPress={() => null}
+      onPress={onPress}
       style={{
         color: Colors.black,
 
@@ -72,10 +72,10 @@ export const ForgotPassword = () => {
   );
 };
 
-export const DontHaveAccount = ({isUserExist}) => {
+export const DontHaveAccount = ({isUserExist, onPress}) => {
   return (
     <CustomText
-      onPress={() => null}
+      onPress={onPress}
       style={{
         marginVertical: verticalScale(20),
         color: Colors.black,
@@ -85,7 +85,7 @@ export const DontHaveAccount = ({isUserExist}) => {
       }}>
       {isUserExist ? 'I already have an Account ' : 'Don’t have an Account? '}
       <CustomText
-        onPress={() => null}
+        onPress={onPress}
         style={{
           textDecorationLine: 'underline',
           color: Colors.primaryColor,

@@ -15,7 +15,7 @@ import {
   TitleText,
 } from '../../Components/Rest';
 
-export default ResetPassword = () => {
+export default ResetPassword = props => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [hidePassword, setHidePassword] = useState(true);
@@ -48,6 +48,12 @@ export default ResetPassword = () => {
           placeholder={'Confirm Password'}
         />
         <PrimaryButton
+          onPress={() =>
+            props.navigation.reset({
+              index: 0,
+              routes: [{name: 'Login'}],
+            })
+          }
           style={{marginTop: verticalScale(50)}}
           title={'Reset Password'}
         />

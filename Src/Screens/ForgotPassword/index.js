@@ -15,7 +15,7 @@ import {
   TitleText,
 } from '../../Components/Rest';
 
-export default ForgotPassword = () => {
+export default ForgotPassword = props => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [hidePassword, setHidePassword] = useState(true);
@@ -37,10 +37,18 @@ export default ForgotPassword = () => {
           error="This is dummy error,error will look like this."
         />
         <PrimaryButton
+          onPress={() =>
+            props.navigation.navigate('VerifyOtp', {
+              type: 'ForgotPassword',
+            })
+          }
           style={{marginTop: verticalScale(50)}}
           title={'Submit & Verify'}
         />
-        <DontHaveAccount isUserExist={true} />
+        <DontHaveAccount
+          isUserExist={true}
+          onPress={() => props.navigation.goBack()}
+        />
       </ScrollView>
     </SafeAreaView>
   );

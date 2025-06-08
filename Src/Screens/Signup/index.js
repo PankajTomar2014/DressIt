@@ -11,9 +11,11 @@ import {
   ForgotPassword,
   Or,
   RememberMe,
+  StatusBaar,
   SubTitleText,
   TitleText,
 } from '../../Components/Rest';
+import {ChildHeader} from '../../Components/Headers';
 
 export default Signup = props => {
   const [email, setEmail] = useState('');
@@ -23,6 +25,7 @@ export default Signup = props => {
 
   return (
     <SafeAreaView style={{flex: 1, backgroundColor: Colors.white}}>
+      <ChildHeader title={'Signup'} />
       <ScrollView>
         <TitleText title={'Sign Up'} />
         <SubTitleText title={'Enter your email to register.'} />

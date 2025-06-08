@@ -1,5 +1,5 @@
 import {useEffect, useState} from 'react';
-import {Image, Pressable, StyleSheet, View} from 'react-native';
+import {Image, Pressable, StatusBar, StyleSheet, View} from 'react-native';
 import {CustomText} from './Title';
 import {moderateScale, scale, verticalScale} from 'react-native-size-matters';
 import Colors from '../Utils/Colors';
@@ -104,7 +104,7 @@ export const TitleText = ({title}) => {
     <CustomText
       style={{
         marginHorizontal: scale(20),
-        marginTop: verticalScale(50),
+        marginTop: verticalScale(10),
         textAlign: 'left',
         marginVertical: verticalScale(10),
         fontWeight: 'bold',
@@ -167,6 +167,21 @@ export const Or = props => {
         source={Images.line}
       />
     </View>
+  );
+};
+
+export const StatusBaar = props => {
+  const {color, light} = props;
+  const isDarkMode = false;
+
+  return (
+    <StatusBar
+      barStyle={
+        light ? 'light-content' : isDarkMode ? 'light-content' : 'dark-content'
+      }
+      backgroundColor={color ? color : Colors.primaryColor}
+      {...props}
+    />
   );
 };
 

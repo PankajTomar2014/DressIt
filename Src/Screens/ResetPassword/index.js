@@ -14,6 +14,7 @@ import {
   SubTitleText,
   TitleText,
 } from '../../Components/Rest';
+import {ChildHeader} from '../../Components/Headers';
 
 export default ResetPassword = props => {
   const [email, setEmail] = useState('');
@@ -23,6 +24,7 @@ export default ResetPassword = props => {
 
   return (
     <SafeAreaView style={{flex: 1, backgroundColor: Colors.white}}>
+      <ChildHeader title={'Reset Password'} />
       <ScrollView>
         <TitleText title={'Reset Password'} />
         <SubTitleText

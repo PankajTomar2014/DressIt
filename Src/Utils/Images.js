@@ -8,4 +8,5 @@ export default Images = {
   facebook: require('../Assets/Images/facebook.png'),
   google: require('../Assets/Images/google.png'),
   line: require('../Assets/Images/line.png'),
+  backArrow: require('../Assets/Images/backArrow.png'),
 };

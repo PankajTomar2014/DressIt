@@ -13,6 +13,7 @@ import {moderateScale, verticalScale} from 'react-native-size-matters';
 // import {showToast} from '../Components/Rest';
 // import {moderateScale, verticalScale} from 'react-native-size-matters';
 // export const OS_Version = DeviceInfo.getSystemVersion();
+export const HEADER_HEIGHT = verticalScale(40);
 export const IS_ANDROID = Platform.OS == 'android';
 export const IS_IOS = Platform.OS == 'ios';
 export const INPUT_TITLE = moderateScale(12);

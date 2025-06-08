@@ -17,6 +17,7 @@ import Colors from '../../Utils/Colors';
 import {PrimaryButton} from '../../Components/CustomButtons';
 import {SubTitleText, TitleText} from '../../Components/Rest';
 import styles from './styles';
+import {ChildHeader} from '../../Components/Headers';
 
 export default OtpVerify = props => {
   const {type} = props.route.params;
@@ -122,6 +123,7 @@ export default OtpVerify = props => {
         flex: 1,
         backgroundColor: isDarkMode ? Colors.bgColor : Colors.white,
       }}>
+      <ChildHeader title={'OTP Verify'} />
       <ScrollView keyboardShouldPersistTaps="always">
         <TitleText title={'We sent link to your Email'} />
         <SubTitleText

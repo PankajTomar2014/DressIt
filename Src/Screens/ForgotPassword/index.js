@@ -24,7 +24,7 @@ export default ForgotPassword = props => {
 
   return (
     <SafeAreaView style={{flex: 1, backgroundColor: Colors.white}}>
-      <ChildHeader title={'OTP Verify'} />
+      <ChildHeader title={'Forgot Password?'} />
       <ScrollView>
         <TitleText title={'Forgot Password?'} />
         <SubTitleText

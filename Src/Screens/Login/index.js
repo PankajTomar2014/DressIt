@@ -71,7 +71,10 @@ export default Login = props => {
           onPress={() => props.navigation.navigate('ForgotPassword')}
         />
       </View>
-      <PrimaryButton title={'Login'} />
+      <PrimaryButton
+        onPress={() => props.navigation.navigate('ForgotPassword')}
+        title={'Login'}
+      />
       <Or />
       <View
         style={{

@@ -103,7 +103,7 @@ export const TitleText = ({title}) => {
   return (
     <CustomText
       style={{
-        paddingLeft: scale(20),
+        marginHorizontal: scale(20),
         marginTop: verticalScale(50),
         textAlign: 'left',
         marginVertical: verticalScale(10),
@@ -118,7 +118,7 @@ export const SubTitleText = ({title}) => {
   return (
     <CustomText
       style={{
-        paddingLeft: scale(20),
+        marginHorizontal: scale(20),
         textAlign: 'left',
         fontSize: moderateScale(15),
       }}>

@@ -11,6 +11,7 @@ import {
   // ForgotPassword,
   Or,
   RememberMe,
+  StatusBaar,
   SubTitleText,
   TitleText,
 } from '../../Components/Rest';
@@ -24,6 +25,7 @@ export default ResetPassword = props => {
 
   return (
     <SafeAreaView style={{flex: 1, backgroundColor: Colors.white}}>
+      <StatusBaar hidden={false} />
       <ChildHeader title={'Reset Password'} />
       <ScrollView>
         <TitleText title={'Reset Password'} />

@@ -25,6 +25,7 @@ export default Signup = props => {
 
   return (
     <SafeAreaView style={{flex: 1, backgroundColor: Colors.white}}>
+      <StatusBaar hidden={false} />
       <ChildHeader title={'Signup'} />
       <ScrollView>
         <TitleText title={'Sign Up'} />

@@ -15,7 +15,7 @@ import {verticalScale} from 'react-native-size-matters';
 import Colors from '../../Utils/Colors';
 
 import {PrimaryButton} from '../../Components/CustomButtons';
-import {SubTitleText, TitleText} from '../../Components/Rest';
+import {StatusBaar, SubTitleText, TitleText} from '../../Components/Rest';
 import styles from './styles';
 import {ChildHeader} from '../../Components/Headers';
 
@@ -28,7 +28,7 @@ export default OtpVerify = props => {
   let textInput4 = useRef(null);
   let textInput5 = useRef(null);
   let textInput6 = useRef(null);
-  const isDarkMode = useColorScheme() == 'dark';
+  const isDarkMode = false;
 
   const [email, setEmail] = useState('');
   const [resendAvailable, setResendAvailable] = useState(false);
@@ -123,6 +123,7 @@ export default OtpVerify = props => {
         flex: 1,
         backgroundColor: isDarkMode ? Colors.bgColor : Colors.white,
       }}>
+      <StatusBaar hidden={false} />
       <ChildHeader title={'OTP Verify'} />
       <ScrollView keyboardShouldPersistTaps="always">
         <TitleText title={'We sent link to your Email'} />

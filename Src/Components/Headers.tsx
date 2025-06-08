@@ -14,7 +14,7 @@ export const ChildHeader = ({title, backPress}) => {
   return (
     <View
       style={{
-        marginTop: verticalScale(30),
+        marginTop: verticalScale(20),
         width: '100%',
         alignSelf: 'center',
         flexDirection: 'row',
@@ -22,7 +22,6 @@ export const ChildHeader = ({title, backPress}) => {
         paddingLeft: scale(10),
         alignItems: 'center',
       }}>
-      <StatusBaar hidden={false} />
       <IconButton
         iconStyle={{
           tintColor: isDarkMode ? Colors.white : Colors.black,
@@ -35,13 +34,13 @@ export const ChildHeader = ({title, backPress}) => {
         icon={Images.backArrow}
         onPress={() => (backPress ? backPress() : navigation.goBack())}
       />
-      <CustomText
+      {/* <CustomText
         style={{
           alignSelf: 'center',
           fontSize: moderateScale(15),
         }}>
         {title}
-      </CustomText>
+      </CustomText> */}
     </View>
   );
 };

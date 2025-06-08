@@ -179,7 +179,7 @@ export const StatusBaar = props => {
       barStyle={
         light ? 'light-content' : isDarkMode ? 'light-content' : 'dark-content'
       }
-      backgroundColor={color ? color : Colors.primaryColor}
+      // backgroundColor={color ? color : Colors.primaryColor}
       {...props}
     />
   );

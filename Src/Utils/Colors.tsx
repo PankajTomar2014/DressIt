@@ -7,6 +7,7 @@ const Colors: {[key: string]: string} = {
   black: '#000000',
   modalBackground: 'rgba(0,0,0,0.6)',
   transparent: 'transparent',
+  red: '#F44336',
 
   // not in use
 
@@ -19,7 +20,7 @@ const Colors: {[key: string]: string} = {
   green: '#07864B',
   lightGreen: '#00B533',
   lightRed: '#ffe6e6',
-  red: '#F44336',
+
   orange: '#FF6B00',
   lineGray: '#C4C4C4',
   dimBlue: '#EBF4FB',

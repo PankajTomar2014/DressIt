@@ -26,6 +26,7 @@ interface InputProps {
   style: object;
 
   placeholder?: string;
+  error?: string;
   headingStyle: object;
   inputStyle: object;
   onPressEye: () => void;
@@ -37,7 +38,7 @@ export const Input: React.FC<InputProps> = ({
   isNeedPassword,
   onPressEye,
   isHide,
-
+  error,
   style,
   placeholder,
   inputStyle,
@@ -105,10 +106,25 @@ export const Input: React.FC<InputProps> = ({
           autoCorrect={false}
           placeholderTextColor={Colors.lightSkyblue}
         />
+
         {isNeedPassword && (
           <HidePassword isHide={isHide || false} onPressEye={onPressEye} />
         )}
       </View>
+      {error && (
+        <CustomText
+          style={[
+            {
+              textAlign: 'left',
+              fontSize: INPUT_TITLE,
+              fontWeight: 'bold',
+              color: Colors.red,
+            },
+            headingStyle,
+          ]}>
+          {error}
+        </CustomText>
+      )}
     </View>
   );
 };

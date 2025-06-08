@@ -72,7 +72,7 @@ export const ForgotPassword = () => {
   );
 };
 
-export const DontHaveAccount = () => {
+export const DontHaveAccount = ({isUserExist}) => {
   return (
     <CustomText
       onPress={() => null}
@@ -83,17 +83,46 @@ export const DontHaveAccount = () => {
         textAlign: 'center',
         fontSize: moderateScale(13),
       }}>
-      {'Don’t have an Account? '}
+      {isUserExist ? 'I already have an Account ' : 'Don’t have an Account? '}
       <CustomText
         onPress={() => null}
         style={{
+          textDecorationLine: 'underline',
           color: Colors.primaryColor,
           fontWeight: 'bold',
           textAlign: 'center',
           fontSize: moderateScale(13),
         }}>
-        {'Sign Up'}
+        {isUserExist ? 'Login' : 'Sign Up'}
       </CustomText>
+    </CustomText>
+  );
+};
+
+export const TitleText = ({title}) => {
+  return (
+    <CustomText
+      style={{
+        paddingLeft: scale(20),
+        marginTop: verticalScale(50),
+        textAlign: 'left',
+        marginVertical: verticalScale(10),
+        fontWeight: 'bold',
+        fontSize: moderateScale(30),
+      }}>
+      {title}
+    </CustomText>
+  );
+};
+export const SubTitleText = ({title}) => {
+  return (
+    <CustomText
+      style={{
+        paddingLeft: scale(20),
+        textAlign: 'left',
+        fontSize: moderateScale(15),
+      }}>
+      {title}
     </CustomText>
   );
 };

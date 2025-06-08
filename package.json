@@ -3,6 +3,7 @@
   "version": "0.0.1",
   "private": true,
   "scripts": {
+    "dev": "yarn start --reset-cache",
     "android": "react-native run-android",
     "ios": "react-native run-ios",
     "lint": "eslint .",
@@ -12,11 +13,10 @@
   "dependencies": {
     "@react-native-async-storage/async-storage": "^2.2.0",
     "@reduxjs/toolkit": "^2.8.2",
-    "axios": "^1.9.0",
     "react": "19.0.0",
     "react-native": "0.79.3",
+    "react-native-linear-gradient": "^2.8.3",
     "react-native-size-matters": "^0.4.2",
-    "react-native-toast-message": "^2.3.0",
     "react-redux": "^9.2.0"
   },
   "devDependencies": {

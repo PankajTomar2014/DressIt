@@ -1,6 +1,8 @@
 // import NetInfo from '@react-native-community/netinfo';
 import {Alert, Dimensions, Platform} from 'react-native';
 import {moderateScale, verticalScale} from 'react-native-size-matters';
+import Toast, {BaseToast, ErrorToast} from 'react-native-toast-message';
+import Colors from './Colors';
 // // import PushNotification from 'react-native-push-notification';
 
 // import {resetUser} from '../Redux/userSlice';
@@ -147,6 +149,79 @@ export const internetErrorMessage = 'Please check internet connection';
 //   }
 // };
 
+export const ToastComponent = () => {
+  return <Toast config={toastConfig} />;
+};
+
+const toastConfig = {
+  success: props => (
+    <BaseToast
+      {...props}
+      text2NumberOfLines={2}
+      topOffset={IS_ANDROID ? 20 : 100}
+      visibilityTime={2000}
+      style={{height: verticalScale(60), borderLeftColor: Colors.green}}
+      text1Style={{fontSize: 15}}
+      text2Style={{
+        fontSize: 13,
+        color: Colors.primaryColor,
+      }}
+      swipeable={true}
+      position={'top'}
+      autoHide={true}
+    />
+  ),
+
+  error: props => (
+    <ErrorToast
+      {...props}
+      style={{height: verticalScale(60), borderLeftColor: Colors.red}}
+      visibilityTime={2000}
+      text2NumberOfLines={2}
+      topOffset={IS_ANDROID ? 20 : 100}
+      text1Style={{fontSize: 15}}
+      text2Style={{
+        fontSize: 13,
+        color: Colors.primaryColor,
+      }}
+      swipeable={true}
+      position={'top'}
+      autoHide={true}
+    />
+  ),
+};
+
+type ToastType = 's' | 'e' | 'i';
+
+export const showToast = (type: ToastType, message: string): void => {
+  try {
+    Toast.show({
+      type: type === 's' ? 'success' : type === 'e' ? 'error' : 'info', // Default to 'info' for unsupported types
+      text1: type === 's' ? 'Success' : type === 'e' ? 'Error' : 'Info',
+      text2: message || '',
+    });
+  } catch (error) {
+    Alert.alert('Error Oops!', error.message || 'An unexpected error occurred');
+  }
+};
+
+export const timeOut = promise => {
+  return new Promise(function (resolve, reject) {
+    const timer = setTimeout(function () {
+      reject(new Error('Server Connection Timeout Error!'));
+    }, 10000);
+
+    promise
+      .then(response => {
+        clearTimeout(timer);
+        resolve(response);
+      })
+      .catch(error => {
+        clearTimeout(timer);
+        reject(error);
+      });
+  });
+};
 // export const getNextFiveYears = () => {
 //   try {
 //     const currentDate = new Date();
@@ -321,23 +396,6 @@ export const internetErrorMessage = 'Please check internet connection';
 //   } catch (error) {
 //     console.log('checkDocumentType error-------', error);
 //   }
-// };
-// export const timeOut = promise => {
-//   return new Promise(function (resolve, reject) {
-//     const timer = setTimeout(function () {
-//       reject(new Error('Server Connection Timeout Error!'));
-//     }, 10000);
-
-//     promise
-//       .then(response => {
-//         clearTimeout(timer);
-//         resolve(response);
-//       })
-//       .catch(error => {
-//         clearTimeout(timer);
-//         reject(error);
-//       });
-//   });
 // };
 
 // export const checkInternetConnected = async () => {

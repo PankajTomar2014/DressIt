@@ -21,6 +21,7 @@ import Images from '../Utils/Images';
 
 import {forwardRef, useRef, useState} from 'react';
 import {CustomText} from './Title';
+import {useSelector} from 'react-redux';
 
 interface InputProps {
   isNeedPassword: boolean;
@@ -161,6 +162,85 @@ export const HidePassword: React.FC<HidePasswordProps> = ({
         }}
       />
     </TouchableOpacity>
+  );
+};
+
+interface PhoneInputProps {
+  placeholder: string;
+  country: string;
+  style: ViewProps;
+  onPress: () => void;
+}
+
+export const PhoneInput: React.FC<PhoneInputProps> = props => {
+  const {placeholder, country, style, onPress, ...rest} = props;
+  const isDarkMode = false;
+  return (
+    <View
+      style={[
+        {
+          alignSelf: 'center',
+          width: '85%',
+          marginTop: verticalScale(5),
+          height: verticalScale(75),
+        },
+        style,
+      ]}>
+      <CustomText
+        style={{
+          textAlign: 'left',
+          fontSize: INPUT_TITLE,
+          fontWeight: 'bold',
+          color: Colors.black,
+        }}>
+        {placeholder}
+      </CustomText>
+
+      <View
+        style={{
+          backgroundColor: Colors.dimGray,
+          borderRadius: scale(10),
+          marginTop: verticalScale(5),
+          flexDirection: 'row',
+          width: '100%',
+          height: INPUT_HEIGHT,
+        }}>
+        <TouchableOpacity
+          onPress={onPress}
+          style={{
+            borderRightWidth: 1,
+            borderColor: Colors.lineGray,
+            alignSelf: 'center',
+            minWidth: '25%',
+
+            height: '100%',
+            justifyContent: 'center',
+            alignItems: 'center',
+          }}>
+          <CustomText
+            style={{
+              fontSize: moderateScale(13),
+              color: isDarkMode ? Colors.white : Colors.primaryColor,
+            }}>
+            {country}
+          </CustomText>
+        </TouchableOpacity>
+        <TextInput
+          {...rest}
+          selectionColor={Colors.lineGray}
+          cursorColor={Colors.blue}
+          placeholderTextColor={Colors.blue}
+          style={{
+            height: INPUT_HEIGHT,
+
+            paddingLeft: scale(15),
+            width: '70%',
+            fontSize: moderateScale(13),
+            color: isDarkMode ? Colors.white : Colors.primaryColor,
+          }}
+        />
+      </View>
+    </View>
   );
 };
 

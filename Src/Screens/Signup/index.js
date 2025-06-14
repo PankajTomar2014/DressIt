@@ -1,25 +1,19 @@
-import {View, Text, Image, SafeAreaView, ScrollView} from 'react-native';
 import React, {useState} from 'react';
-import Images from '../../Utils/Images';
-import {moderateScale, scale, verticalScale} from 'react-native-size-matters';
-import Colors from '../../Utils/Colors';
-import {CustomText} from '../../Components/Title';
-import {IconButton, PrimaryButton} from '../../Components/CustomButtons';
+import {SafeAreaView, ScrollView} from 'react-native';
+import {verticalScale} from 'react-native-size-matters';
+import {PrimaryButton} from '../../Components/CustomButtons';
+import {ChildHeader} from '../../Components/Headers';
 import {Input, PhoneInput} from '../../Components/Input';
 import {
   DontHaveAccount,
-  ForgotPassword,
-  Or,
-  RememberMe,
   StatusBaar,
   SubTitleText,
   TitleText,
 } from '../../Components/Rest';
-import {ChildHeader} from '../../Components/Headers';
-import {showToast} from '../../Utils/helperFn';
-import ApiRequest from '../../Services/ApiRequest';
 import ApiList from '../../Services/ApiList';
-import {Loader} from '../../Components/Loader';
+import ApiRequest from '../../Services/ApiRequest';
+import Colors from '../../Utils/Colors';
+import {showToast} from '../../Utils/helperFn';
 import {validateEmail} from '../../Utils/Validation';
 
 export default Signup = props => {
@@ -43,7 +37,6 @@ export default Signup = props => {
       const {error} = validateEmail(trimedText);
       setEmailError(error || '');
     } catch (error) {
-      console.error('Catch Error : -------', error);
       showToast('e', error.message);
     }
   };
@@ -52,7 +45,6 @@ export default Signup = props => {
     try {
       const trimedText = text.trimStart();
       setPhone(trimedText);
-      // setPhone(formatPhoneNumber(trimedText, 'SA'));
     } catch (error) {
       showToast('e', error.message);
     }
@@ -60,19 +52,19 @@ export default Signup = props => {
 
   const validateUser = () => {
     try {
-      if (firstName) {
+      if (firstName == '') {
         showToast('e', 'Please enter first name');
-      } else if (lastName) {
+      } else if (lastName == '') {
         showToast('e', 'Please enter last name');
-      } else if (email) {
+      } else if (email == '') {
         showToast('e', 'Please enter email');
       } else if (!validateEmail(email).status) {
         showToast('e', 'Please enter valid email');
-      } else if (phone) {
+      } else if (phone == '') {
         showToast('e', 'Please enter phone');
-      } else if (password) {
+      } else if (password == '') {
         showToast('e', 'Please enter password');
-      } else if (confirmPassword) {
+      } else if (confirmPassword == '') {
         showToast('e', 'Please enter confirm password');
       } else if (password !== confirmPassword) {
         showToast('e', 'Password and confirm password not matched');
@@ -87,16 +79,19 @@ export default Signup = props => {
   const signupAPI = async () => {
     try {
       setLoading(true);
+
+      const payload = {
+        name: firstName + ' ' + lastName,
+        email: email,
+        password: password,
+        password_confirmation: password,
+        phone: '+91' + phone,
+      };
+
       const response = await ApiRequest({
         endPoint: ApiList.register,
         method: 'post',
-        query: {
-          name: firstName + ' ' + lastName,
-          email: email,
-          password: password,
-          password_confirmation: password,
-          phone: '+91' + phone,
-        },
+        query: payload,
       });
       if (response.status) {
         showToast('s', response.message);
@@ -104,6 +99,7 @@ export default Signup = props => {
           setLoading(false);
           props.navigation.navigate('VerifyOtp', {
             type: 'signup',
+            data: payload,
           });
         }, 1000);
       } else {
@@ -124,6 +120,7 @@ export default Signup = props => {
         <TitleText title={'Sign Up'} />
         <SubTitleText title={'Enter your email to register.'} />
         <Input
+          editable={!isLoading}
           style={{marginTop: verticalScale(40)}}
           onChangeText={text => {
             const sanitizedText = text
@@ -136,6 +133,7 @@ export default Signup = props => {
         />
 
         <Input
+          editable={!isLoading}
           value={lastName}
           onChangeText={text => {
             const sanitizedText = text
@@ -147,6 +145,7 @@ export default Signup = props => {
         />
 
         <Input
+          editable={!isLoading}
           placeholder={'Enter email'}
           error={emailError}
           onChangeText={text => handleEmailValidate(text)}
@@ -165,6 +164,7 @@ export default Signup = props => {
           value={phone}
         />
         <Input
+          editable={!isLoading}
           onChangeText={text => setPassword(text?.trimStart())}
           isNeedPassword
           isHide={hidePassword}
@@ -175,6 +175,7 @@ export default Signup = props => {
         />
 
         <Input
+          editable={!isLoading}
           onChangeText={text => setConfirmPassword(text?.trimStart())}
           placeholder={'Confirm Password'}
           value={confirmPassword}
@@ -191,13 +192,7 @@ export default Signup = props => {
         />
         <PrimaryButton
           isLoading={isLoading}
-          // onPress={() => showToast('e', 'okokoko')}
-          onPress={() => signupAPI()}
-          // onPress={() =>
-          //   props.navigation.navigate('VerifyOtp', {
-          //     type: 'signup',
-          //   })
-          // }
+          onPress={() => validateUser()}
           style={{marginTop: verticalScale(30)}}
           title={'Submit & Verify'}
         />

@@ -23,8 +23,8 @@ import {
 import {IS_IOS} from '../../Utils/helperFn';
 
 export default Login = props => {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
+  const [email, setEmail] = useState('pankaj1011@yopmail.com');
+  const [password, setPassword] = useState('12345678');
   const [hidePassword, setHidePassword] = useState(true);
   const [isLoading, setLoading] = useState(false);
 

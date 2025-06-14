@@ -99,7 +99,7 @@ export const DontHaveAccount = ({isUserExist, onPress}) => {
   );
 };
 
-export const TitleText = ({title}) => {
+export const TitleText = ({title, link}) => {
   return (
     <CustomText
       style={{
@@ -111,6 +111,17 @@ export const TitleText = ({title}) => {
         fontSize: moderateScale(30),
       }}>
       {title}
+      {link && (
+        <CustomText
+          onPress={() => null}
+          style={{
+            color: Colors.primaryColor,
+            textDecorationLine: 'underline',
+            fontSize: moderateScale(20),
+          }}>
+          {link}
+        </CustomText>
+      )}
     </CustomText>
   );
 };

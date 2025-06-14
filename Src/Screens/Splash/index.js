@@ -25,12 +25,15 @@ const WelcomeScreen = ({navigation}) => {
   useEffect(() => {
     setTimeout(() => {
       isUserLoggedIn();
-    }, 2500);
+    }, 1000);
   }, []);
 
   const isUserLoggedIn = async () => {
     try {
       const user = await AsyncStorage.getItem('user');
+
+      console.log('splash---', user);
+
       const isLoggedIn = JSON.parse(user);
       if (isLoggedIn) {
         dispatch(saveUser(isLoggedIn));

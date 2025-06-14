@@ -24,8 +24,11 @@ import {IS_IOS, showToast} from '../../Utils/helperFn';
 import {validateEmail} from '../../Utils/Validation';
 import ApiRequest from '../../Services/ApiRequest';
 import ApiList from '../../Services/ApiList';
+import {useDispatch} from 'react-redux';
+import {saveUser} from '../../Redux/userSlice';
 
 export default Login = props => {
+  const dispatch = useDispatch();
   const [email, setEmail] = useState('pankaj1011@yopmail.com');
   const [password, setPassword] = useState('12345678');
   const [hidePassword, setHidePassword] = useState(true);
@@ -66,6 +69,8 @@ export default Login = props => {
           ...response.data.user,
           token: response.data.token,
         };
+
+        dispatch(saveUser(userData));
 
         setTimeout(() => {
           props.navigation.reset({

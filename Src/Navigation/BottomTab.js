@@ -15,11 +15,13 @@ import Colors from '../Utils/Colors';
 // import Settings from '../Screens/Settings';
 // import Dashboard from '../Screens/Dashboard';
 // import TransactionHistory from '../Screens/TransactionHistory';
-import {verticalScale} from 'react-native-size-matters';
+import {moderateScale, verticalScale} from 'react-native-size-matters';
 import Images from '../Utils/Images';
 import {CustomText} from '../Components/Title';
 import {PrimaryButton} from '../Components/CustomButtons';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import {useSelector} from 'react-redux';
+import {capitalizeEveryFirstLetter} from '../Utils/helperFn';
 
 const AnimatedTabIcon = ({focused, source}) => {
   const viewRef = useRef(null);
@@ -117,8 +119,16 @@ export default function BottomTab() {
 }
 
 const Profile = ({navigation}) => {
+  const user = useSelector(state => state.user.user);
+
+  console.log('user---', user);
+
   return (
     <SafeAreaView style={{flex: 1, justifyContent: 'center'}}>
+      <CustomText style={{fontSize: moderateScale(40)}}>{'Welcome'}</CustomText>
+      <CustomText style={{fontSize: moderateScale(15)}}>
+        {capitalizeEveryFirstLetter(user?.name)}
+      </CustomText>
       <PrimaryButton
         onPress={async () => {
           await AsyncStorage.clear();

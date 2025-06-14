@@ -222,6 +222,29 @@ export const timeOut = promise => {
       });
   });
 };
+
+export const capitalizeEveryFirstLetter = letter => {
+  try {
+    const arr = letter.split(' ');
+    for (var i = 0; i < arr.length; i++) {
+      arr[i] = arr[i].charAt(0).toUpperCase() + arr[i].slice(1);
+    }
+    const str2 = arr.join(' ');
+    return str2;
+  } catch (error) {
+    console.log('capitalizeEveryFirstLetter Error : ', error.message);
+    return '';
+  }
+};
+export const capitalizeOnlyFirstLetter = letter => {
+  try {
+    return letter.charAt(0).toUpperCase() + letter.slice(1);
+  } catch (error) {
+    console.log('capitalizeOnlyFirstLetter Error : ', error.message);
+    return '';
+  }
+};
+
 // export const getNextFiveYears = () => {
 //   try {
 //     const currentDate = new Date();

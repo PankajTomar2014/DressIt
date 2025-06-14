@@ -20,13 +20,69 @@ import {
   RememberMe,
   StatusBaar,
 } from '../../Components/Rest';
-import {IS_IOS} from '../../Utils/helperFn';
+import {IS_IOS, showToast} from '../../Utils/helperFn';
+import {validateEmail} from '../../Utils/Validation';
+import ApiRequest from '../../Services/ApiRequest';
+import ApiList from '../../Services/ApiList';
 
 export default Login = props => {
   const [email, setEmail] = useState('pankaj1011@yopmail.com');
   const [password, setPassword] = useState('12345678');
   const [hidePassword, setHidePassword] = useState(true);
   const [isLoading, setLoading] = useState(false);
+
+  const validateUser = () => {
+    try {
+      if (email == '') {
+        showToast('e', 'Please enter email');
+      } else if (!validateEmail(email).status) {
+        showToast('e', 'Please enter valid email');
+      } else if (password == '') {
+        showToast('e', 'Please enter password');
+      } else {
+        loginAPI();
+      }
+    } catch (error) {
+      showToast('e', error.message);
+    }
+  };
+
+  const loginAPI = async () => {
+    try {
+      setLoading(true);
+      const response = await ApiRequest({
+        endPoint: ApiList.login,
+        method: 'post',
+        query: {
+          email,
+          password,
+        },
+      });
+
+      if (response.status) {
+        showToast('s', response.message);
+
+        const userData = {
+          ...response.data.user,
+          token: response.data.token,
+        };
+        console.log('userData---', userData);
+        setTimeout(() => {
+          props.navigation.reset({
+            index: 0,
+            routes: [{name: 'Login'}],
+          });
+          setLoading(false);
+        }, 1000);
+      } else {
+        setLoading(false);
+        showToast('e', response.message);
+      }
+    } catch (error) {
+      showToast('e', error.message);
+      setLoading(false);
+    }
+  };
 
   return (
     <SafeAreaView style={{flex: 1, backgroundColor: Colors.white}}>
@@ -82,10 +138,7 @@ export default Login = props => {
               onPress={() => props.navigation.navigate('ForgotPassword')}
             />
           </View>
-          <PrimaryButton
-            onPress={() => props.navigation.navigate('ForgotPassword')}
-            title={'Login'}
-          />
+          <PrimaryButton onPress={() => validateUser()} title={'Login'} />
           <Or />
           <View
             style={{

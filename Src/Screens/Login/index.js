@@ -66,11 +66,11 @@ export default Login = props => {
           ...response.data.user,
           token: response.data.token,
         };
-        console.log('userData---', userData);
+
         setTimeout(() => {
           props.navigation.reset({
             index: 0,
-            routes: [{name: 'Login'}],
+            routes: [{name: 'BottomTab'}],
           });
           setLoading(false);
         }, 1000);
@@ -113,16 +113,26 @@ export default Login = props => {
           </CustomText>
 
           <Input
+            editable={!isLoading}
+            onChangeText={text => setEmail(text?.trimStart())}
+            keyboardType={'email-address'}
+            autoCapitalize={'none'}
+            maxLength={40}
             style={{marginTop: verticalScale(40)}}
             placeholder={'Enter email'}
+            value={email}
           />
+
           <Input
+            onChangeText={text => setPassword(text?.trimStart())}
             editable={!isLoading}
             isNeedPassword
             isHide={hidePassword}
             secureTextEntry={hidePassword}
             onPressEye={() => setHidePassword(!hidePassword)}
             placeholder={'Password'}
+            onSubmitEditing={text => validateUser()}
+            value={password}
           />
 
           <View
@@ -138,7 +148,11 @@ export default Login = props => {
               onPress={() => props.navigation.navigate('ForgotPassword')}
             />
           </View>
-          <PrimaryButton onPress={() => validateUser()} title={'Login'} />
+          <PrimaryButton
+            isLoading={isLoading}
+            onPress={() => validateUser()}
+            title={'Login'}
+          />
           <Or />
           <View
             style={{
